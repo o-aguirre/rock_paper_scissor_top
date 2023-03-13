@@ -26,7 +26,11 @@ function playRound (maquina, jugador) {
 
     let jugadaMaquina = maquina();
 
-    if (jugador === 'piedra' && jugadaMaquina === 'tijera') {
+    if (contadorComputer === 5){
+        p.textContent = 'Sorry. Machines win!'
+    } else if (contadorPlayer === 5) {
+        p.textContent = 'You win!'
+    } else if (jugador === 'piedra' && jugadaMaquina === 'tijera') {
         p.textContent = 'You win! Rock beats scissor';
         contadorPlayer += 1;
     } else if (jugador === 'piedra' && jugadaMaquina === 'papel') {
