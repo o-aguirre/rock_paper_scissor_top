@@ -1,10 +1,10 @@
 //variables globales
 let contadorPlayer = 0;
 let contadorComputer = 0;
-let playerSelection = null;
+const div = document.querySelector('.content');
 
 //funcion jugada maquina
-const getComputerChoice = function() {
+function getComputerChoice() {
     let computerSelection = Math.floor(Math.random() * (3 - 1 + 1) + 1);
     switch (computerSelection) {
         case 1:
@@ -18,59 +18,61 @@ const getComputerChoice = function() {
             break;
     }
     return computerSelection;
-}
+};
+
 
 //funcion que retorna un ganador
-function playRound(playerSelection, getComputerChoice) {
-    computerSelection = getComputerChoice();
-    
-    playerSelection = playerSelection.toLowerCase();
-    console.log(computerSelection)
+function playRound (maquina, jugador) {
 
-    if (playerSelection === 'piedra' && computerSelection === 'tijera') {
-        console.log('You win! Rock beats scissor')
+    let jugadaMaquina = maquina();
+
+    if (jugador === 'piedra' && jugadaMaquina === 'tijera') {
+        p.textContent = 'You win! Rock beats scissor';
         contadorPlayer += 1;
-    } else if (playerSelection === 'piedra' && computerSelection === 'papel') {
-        console.log('You lose! paper beats rock')
+    } else if (jugador === 'piedra' && jugadaMaquina === 'papel') {
+        p.textContent = 'You lose! Paper beats rock';
         contadorComputer += 1;
-    } else if (playerSelection === 'piedra' && computerSelection === 'piedra') {
-        console.log('Draw')
-    } else if (playerSelection === 'papel' && computerSelection === 'piedra') {
-        console.log('You win! Paper beats rock')
+    } else if (jugador === 'piedra' && jugadaMaquina === 'piedra') {
+        p.textContent = 'Draw';
+    } else if (jugador === 'papel' && jugadaMaquina === 'piedra') {
+        p.textContent = 'You win! Paper beats rock';
         contadorPlayer += 1;
-    } else if (playerSelection === 'papel' && computerSelection === 'papel') {
-        console.log('Draw')
-    } else if (playerSelection === 'papel' && computerSelection === 'tijera') {
-        console.log('You lose! Scissor beats paper')
+    } else if (jugador === 'papel' && jugadaMaquina === 'papel') {
+        p.textContent = 'Draw';
+    } else if (jugador === 'papel' && jugadaMaquina === 'tijera') {
+        p.textContent = 'You lose! Scissor beats paper';
         contadorComputer += 1;
-    } else if (playerSelection === 'tijera' && computerSelection === 'piedra') {
-        console.log('You lose! Rock beats scissor')
+    } else if (jugador === 'tijera' && jugadaMaquina === 'piedra') {
+        p.textContent = 'You lose! Rock beats scissor';
         contadorComputer += 1;
-    } else if (playerSelection === 'tijera' && computerSelection === 'papel') {
-        console.log('You win! Scissor beats paper')
+    } else if (jugador === 'tijera' && jugadaMaquina === 'papel') {
+        p.textContent = 'You win! Scissor beats paper';
         contadorPlayer += 1;
-    } else if (playerSelection === 'tijera' && computerSelection === 'tijera') {
-        console.log('Draw')
+    } else if (jugador === 'tijera' && jugadaMaquina === 'tijera') {
+        p.textContent = 'Draw';
     } else {
         console.log('Error ...something wrong')
     }
+};
 
-    console.log(`${contadorComputer} ... ${contadorPlayer}`)
-} 
+const btns = document.querySelectorAll('button');
+btns.forEach(btn => btn.addEventListener('click', () => playRound(getComputerChoice, btn.id)))
+
+const p = document.createElement('p');
+div.appendChild(p)
 
 //funcion bucle que llama otras funciones y se repite 5 veces
-function game () {
-    for(let i = 1; i <= 5; i++) {
-        playerSelection = prompt('ingrese su jugada');
-        playRound(playerSelection, getComputerChoice)
-    }
-    if(contadorPlayer > contadorComputer) {
-        console.log('Has ganado')
-    } else if (contadorPlayer < contadorComputer) {
-        console.log('Has perdido')
-    } else {
-        console.log('Has empatado')
-    }
-}
+// function game () {
+    
+//     if(contadorPlayer > contadorComputer) {
+//         console.log('Has ganado')
+//     } else if (contadorPlayer < contadorComputer) {
+//         console.log('Has perdido')
+//     } else {
+//         console.log('Has empatado')
+//     }
+// }
 
-game()
+
+
+//game()
